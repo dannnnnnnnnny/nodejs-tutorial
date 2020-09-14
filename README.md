@@ -1,9 +1,9 @@
-*Client - Server 통신
+#Client - Server 통신
 
 1. 회원가입시 Client를 통해 이메일, 이름, 패스워드를 입력 후 서버로 보냄
 2. Body-parser를 통해 Client에서 보낸 값을 받음 (Body-parser dependency)
 
-# Client가 없을 경우 Postman을 사용하여 요청해볼 수 있음
+*Client가 없을 경우 Postman을 사용하여 요청해볼 수 있음
 
 
 *Node Mon
