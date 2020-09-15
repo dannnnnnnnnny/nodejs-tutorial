@@ -1,6 +1,5 @@
 const express = require('express') // 모듈 import
 const app = express()
-const port = 5000
 const config = require('./config/key')
 const { auth } = require('./middleware/auth')
 const cookieParser = require('cookie-parser')
@@ -27,6 +26,11 @@ mongoose.connect(config.mongoURI, {
 /* 메인 */
 app.get('/', (req, res) => { // root 디렉토리
   res.send('Hello World!')
+})
+
+
+app.get('/api/hello', (req, res) => {
+    res.send("Hello~")
 })
 
 
@@ -130,6 +134,8 @@ app.get('/api/users/logout', auth, (req, res) => {  // 로그인 중인 상태�
         })
 })
 
+
+const port = 5000
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })

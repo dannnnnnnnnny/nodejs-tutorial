@@ -4,6 +4,14 @@
 2. Body-parser를 통해 Client에서 보낸 값을 받음 (Body-parser dependency)
 
 *Client가 없을 경우 Postman을 사용하여 요청해볼 수 있음
+- React를 사용하여 Server 측으로 Request할 때, Axios를 사용
+- 처음에 Axios 를 통해 server 측으로 axios.get() 을 보내면 404에러가 발생함.
+=> Server는 port 5000, client는 port 3000 임
+=> Cors 정책 때문 (Cross-Origin Resource Sharing)
+=> 해결 방법 중, Proxy를 사용하는 방법으로 해결 
+(https://create-react-app.dev/docs/proxying-api-requests-in-development/)
+
+
 
 
 # Node Mon
@@ -48,7 +56,7 @@ npm install -g : '-g' 명령어를 주면 global로 다운로드가 되어 윈�
 
 
 ---------------------------------------------------
-client (react) 설명
+# client (react) 설명
 _actions, _reducer : Redux를 위한 폴더
 components/views : 각종 Page들
 
@@ -56,3 +64,4 @@ App.js : Routing 관련 처리
 Config.js : 환경 변수 관리
 hoc : Higher Order Components, 인증이나 권한 등 처리
 utils : 여러 군데서 사용할 것들 담음
+
