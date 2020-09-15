@@ -88,8 +88,12 @@ app.post('/api/users/login', (req, res) => {
 
 
 /* auth 인증 */
-// 쿠키의 token을 decode('secretToken'으로)하여 user._id를 알아낸 후
+// client 쿠키의 token을 decode('secretToken'으로)하여 user._id를 알아낸 후
 // DB에서 user._id의 토큰을 찾아 인증
+/*
+    1. 페이지 이동시 로그인되어 있는지, 관리자 유저인지 등을 체크
+    2. 글을 쓸때나 지울 때 권한이 있는지 체크    
+*/
 app.get('/api/users/auth', auth, (req, res) => { // auth라는 middleware 추가
 
     // auth middlieware 먼저 거치고 옴
@@ -105,6 +109,25 @@ app.get('/api/users/auth', auth, (req, res) => { // auth라는 middleware 추가
         image: req.user.image
     })
 
+})
+
+
+/* 로그아웃 */
+// 로그아웃 하려는 유저를 DB에서 찾고
+// 유저의 토큰을 지워줌
+
+app.get('/api/users/logout', auth, (req, res) => {  // 로그인 중인 상태이기 때문에 auth middleware 추가
+
+    // auth middleware에서 쿠키를 통해 해당 유저를 req.user에 담음
+    // token 을 공백으로 바꿈으로써 인증할 수 없게 만들어, 로그아웃
+    // 유저를 찾아서 업데이트
+    User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
+            if(err)
+                return res.json({ success: false, err });
+            return res.status(200).send({
+                success: true
+            })
+        })
 })
 
 app.listen(port, () => {
