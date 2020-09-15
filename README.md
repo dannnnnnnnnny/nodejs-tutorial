@@ -82,3 +82,35 @@ Config.js : 환경 변수 관리
 hoc : Higher Order Components, 인증이나 권한 등 처리
 utils : 여러 군데서 사용할 것들 담음
 
+---------------------------------------------------
+# CSS Framework
+: 기능을 만드는 데 더욱 집중하기 위해서 사용
+    - 종류
+    1. Material UI
+    2. React Bootstrap
+    3. Semantic UI
+    4. Ant Design
+    5. Materialize
+    ...
+
+---------------------------------------------------
+# Redux
+- 상태(state) 관리 라이브러리
+
+    React =>
+    1. Props
+        - Properties
+        - 컴포넌트 간에 주고받을 때 props 사용
+        - 소통 방식 ( 부모 -> 자식 )
+        - 불변 객체 (부모에서 넘어온 props는 자식에서 바꿀 수 없음)
+    2. State
+        - props처럼 data를 보내는게 아닌 컴포넌트 안에서 데이터 전달 ( 검색 창에 글 입력시 글이 변하는 것은 state를 바꾼 것)
+        - 가변 객체
+        - state가 변하면 re-render 됨
+
+    * Redux 데이터 Flow (한방향으로만 흐름)
+    Action --> Reducer --> Store -(Subscribe)-> React Component -(Dispatch(action))-> Action 반복 
+
+    - Action : ex) {type: 'LIKE_ARTICLE', articleId: 42}  // id 42를 좋아요 했다는 의미
+    - Reducer : (previousState, action) => nextState // 이전 state와 action object를 받은 후 변한 new state를 return 함
+    - Store : 전체적인 State을 감싸주는 역할, Store안의 메소드를 통해 state를 관리할 수 있음
