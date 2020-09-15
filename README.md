@@ -121,3 +121,24 @@ utils : 여러 군데서 사용할 것들 담음
 
     - redux-promise : dispatch에게 promise을 받는 방법을 알려줌
     - redux-thunk : dispatch에게 function을 받는 방법을 알려줌
+
+---------------------------------------------------
+# React Hooks
+* 클래스 컴포넌트
+    - 많은 기능들을 사용 가능
+    - 코드가 길어짐
+    - 복잡해짐
+    - 느린 퍼포먼스
+
+* 함수형 컴포넌트
+    - 제공하는 기능이 한정됨
+    - 코드가 짧아짐
+    - 가독성이 좋음
+    - 빠른 퍼포먼스
+
+* 클래스 컴포넌트 사용시 LifeCycles
+- Mounting, Updating, Unmounting ...
+=> 함수형 컴포넌트에서 사용할 수가 없음
+=> But, React Hooks를 통해 함수형 컴포넌트에서도 LifeCycles 사용 가능해짐
+
+
