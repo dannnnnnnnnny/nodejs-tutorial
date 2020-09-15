@@ -94,7 +94,6 @@ userSchema.statics.findByToken = function(token, cb) {
     // 토큰을 decode
     jwt.verify(token, 'secretToken', function(err, decoded) {
         if(err) {
-            console.log("############");
             throw err;
 
         }

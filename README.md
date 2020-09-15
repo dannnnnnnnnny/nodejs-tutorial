@@ -15,3 +15,35 @@ npm install nodemon --save-dev
 # 패스워드 암호화
 - Postman의 body raw를 통해 {"name":~~, "password":~~} 이런식으로 값을 넘기면 데이터베이스에 그대로 들어가기 때문에 안전하지 않음.
 - Bcrypt를 이용하여 비밀번호를 암호화 후 저장
+
+---------------------------------------------------
+
+# React 라이브러리
+- Real DOM 과 다르게 Virtual DOM 은 하나가 업데이트 되었을 때
+전체를 업데이트 하는 것이 아니라 바뀐 하나만 DOM에서 바꿔줌
+
+1. JSX 렌더링 -> Virtual DOM Update
+2. Virtual DOM이 이전 virtual DOM에서 찍어둔 Snapshot와 비교해서 바뀐 부분 찾음 ('diffing')
+3. 바뀐 부분만 Real DOM에서 바꿔줌
+
+# Babel
+: 최신 자바스크립트 문법을 지원하지 않는 브라우저들을 위해서
+최신 자바스크립트 문법을 구형 브라우저에서도 돌 수 있게 반환시켜줌.
+
+# Webpack
+: 많은 모듈들을 합해서 간단하게 만들어줌
+create-react-app 으로 생성된 폴더/파일들에서 src폴더만
+webpack이 관리를 해줌. public은 관리를 해주지 않기 때문에
+이미지 파일들을 앱에 넣고 싶을 때는 src에 넣어줘야 webpack이 파일들을 모아줌.
+
+
+# NPX & NPM
+- NPM : 레지스트리, 라이브러리를 담는 역할 / 빌드 역할 (package.json) 
+npm install -g : '-g' 명령어를 주면 global로 다운로드가 되어 윈도우 같은 경우 '%AppData%/npm'에 다운이 됨.
+
+- NPX : 다운받지 않고 npm registry에서 create-react-app을 찾아서 실행시켜줌
+    - NPX의 장점 :
+    1. Disk Space를 낭비하지 않음
+    2. 항상 최신 버전을 사용할 수 있음
+
+
