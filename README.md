@@ -11,7 +11,18 @@
 => 해결 방법 중, Proxy를 사용하는 방법으로 해결 
 (https://create-react-app.dev/docs/proxying-api-requests-in-development/)
 
+    * proxy 기능
+    1. IP를 Proxy Server에서 임의로 바꿀 수 있음(인터넷에 접근하는 사람의 IP를 모르게 함)
+    2. 보내는 데이터를 임의로 바꿀 수 있음.
+    3. 방화벽 기능
+    4. 웹 필터 기능
+    5. 캐쉬 데이터, 공유 데이터 제공 기능
 
+    * proxy 사용 이유
+    1. 회사에서 직원들이나 집안에서 아이들 인터넷 사용 제어
+    2. 캐쉬를 이용하여 더 빠른 인터넷 이용 제공
+    3. 더 나은 보안 제공
+    4. 이용 제한된 사이트 접근 가능
 
 
 # Node Mon
