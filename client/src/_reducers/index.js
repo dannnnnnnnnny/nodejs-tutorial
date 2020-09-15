@@ -4,12 +4,12 @@ import { combineReducers } from "redux";
     rootReducer 안에서 하나로 합쳐줌.
 */ 
 
-// import user from './user_reducer';
+import user from './user_reducer';
 // import comment from './comment_reducer';
 
 
 const rootReducer = combineReducers({
-    // user, comment, ...
+    user
 })
 
 export default rootReducer;
