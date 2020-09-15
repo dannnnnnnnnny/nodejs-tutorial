@@ -24,6 +24,12 @@
     3. 더 나은 보안 제공
     4. 이용 제한된 사이트 접근 가능
 
+* Concurrently
+: 프론트엔드, 백엔드 서버 한번에 켜기
+in package.json
+    "start": "concurrently \"command1 arg\" \"command2 arg\""
+    - "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"" (이런 식으로 작성 --prefix 해주면 client를 찾아서 직접 실행시켜줌)
+
 
 # Node Mon
 : 소스를 변경할 때 그걸 감지해서 자동으로 서버를 재시작해주는 툴
