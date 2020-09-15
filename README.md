@@ -111,6 +111,13 @@ utils : 여러 군데서 사용할 것들 담음
     * Redux 데이터 Flow (한방향으로만 흐름)
     Action --> Reducer --> Store -(Subscribe)-> React Component -(Dispatch(action))-> Action 반복 
 
-    - Action : ex) {type: 'LIKE_ARTICLE', articleId: 42}  // id 42를 좋아요 했다는 의미
+    - Action : ex) 객체 형식 {type: 'LIKE_ARTICLE', articleId: 42}  // id 42를 좋아요 했다는 의미
     - Reducer : (previousState, action) => nextState // 이전 state와 action object를 받은 후 변한 new state를 return 함
     - Store : 전체적인 State을 감싸주는 역할, Store안의 메소드를 통해 state를 관리할 수 있음
+
+    * redux 미들웨어
+    redux를 더 잘 다룰 수 있게 해주는 도구
+    : store의 state을 변경하고싶을 때는 dispatch를 이용하여 action(객체 형식)을 통해 바꿀 수 있는데, 언제나 객체 형식의 action을 받는 것이 아니라 promise 나 function 으로 받을 수도 있음.
+
+    - redux-promise : dispatch에게 promise을 받는 방법을 알려줌
+    - redux-thunk : dispatch에게 function을 받는 방법을 알려줌
