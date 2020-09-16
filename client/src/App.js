@@ -33,7 +33,8 @@ function App() {
           </Route> */}
           <Route exact path="/" component={Auth(LandingPage, null)} />
           <Route exact path="/login" component={Auth(LoginPage, false)} />
-          <Route exact path="/register" component={Auth(RegisterPage, true)} />
+          <Route exact path="/register" component={Auth(RegisterPage, false)} />
+          {/* page 이동시마다 HOC를 통해 통제 권한 체크 */}
         </Switch>
       </div>
     </Router>

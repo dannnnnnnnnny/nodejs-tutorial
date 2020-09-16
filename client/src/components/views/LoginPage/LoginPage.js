@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import Axios from 'axios'
 import { useDispatch } from "react-redux"
 import { loginUser } from '../../../_actions/user_actions';
+import { withRouter } from 'react-router-dom';
 
-export default function LoginPage(props) {
+function LoginPage(props) {
     const dispatch = useDispatch(); // redux를 위한 dispatch
 
     const [Email, setEmail] = useState('')
@@ -56,3 +57,5 @@ export default function LoginPage(props) {
         </div>
     )
 }
+
+export default withRouter(LoginPage)

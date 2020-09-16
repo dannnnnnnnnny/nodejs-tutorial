@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
-export default function LandingPage(props) {
+function LandingPage(props) {
     
     useEffect(() => {
         axios.get('/api/hello')
@@ -32,3 +33,5 @@ export default function LandingPage(props) {
         </div>
     )
 }
+
+export default withRouter(LandingPage)
