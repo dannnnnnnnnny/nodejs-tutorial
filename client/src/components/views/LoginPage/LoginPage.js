@@ -29,6 +29,8 @@ export default function LoginPage(props) {
             .then(response => {
                 if(response.payload.loginSuccess) {
                     props.history.push('/')     // props.history.push() 를 통해 페이지 이동
+                } else {
+                    alert('Failed to login')
                 }
             })
     }
