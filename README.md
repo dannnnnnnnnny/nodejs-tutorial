@@ -142,3 +142,16 @@ utils : 여러 군데서 사용할 것들 담음
 => But, React Hooks를 통해 함수형 컴포넌트에서도 LifeCycles 사용 가능해짐
 
 
+---------------------------------------------------
+# Auth Check
+- 아무나 진입 가능한 페이지
+ex) LandingPage, AboutPage
+
+- 로그인한 회원만 진입 가능한 페이지
+ex) DetailPage
+
+- 로그인한 회원은 진입 못하는 페이지
+ex) RegisterPage, LoginPage
+
+- 관리자만 진입 가능한 페이지
+ex) AdminPage
