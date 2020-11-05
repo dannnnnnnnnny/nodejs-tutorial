@@ -155,3 +155,7 @@ ex) RegisterPage, LoginPage
 
 - 관리자만 진입 가능한 페이지
 ex) AdminPage
+
+=> 통제하기위해서 HOC (higherOrderComponent) 사용
+const EnhancedComponent = higherOrderComponent(WrappedComponent);
+
