@@ -315,3 +315,26 @@ router.get('/users/:id', function(req, res) => {
 
 
 ## 템플릿 엔진
+- html은 js가 없을 시 주어진 기능만 이용가능한 정적인 언어임
+- 템플릿 엔진은 자바스크립트를 통해 html을 렌더링할 수 있게 해줌
+
+### PUG
+- 먼저 사용하기 위해서는 
+``` JS
+app.use('views', path.join(__dirname, 'views'));
+app.use('view engine', 'pug')
+``` 
+- 가 있어야 함.
+- /views 는 템플릿 파일들이 위치한 폴더를 지정하는 것
+- res.render('index') 는 views.index.pug를 렌더링함
+
+### EJS
+- npm i ejs
+
+``` JS
+app.use('views', path.join(__dirname, 'views'));
+app.use('view engine', 'ejs')
+```
+
+
+
