@@ -22,12 +22,12 @@ app.use(function(req, res, next) {
 
 
 // app.use() : 미들웨어를 연결하는 부분
-// app.use(logger('dev'));
-app.use(logger('common'));
+app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
