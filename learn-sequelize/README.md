@@ -176,3 +176,175 @@ db.Hashtag.belongsToMany(db.Post, { through: 'PostHashtag' });
 - N:M 관계 특성상 새로운 모델이 생성됨
 - through 속성에 그 이름을 적어주면 됨
 - 새로 생성된 PostHashtag 모델에는 게시글과 해시태그의 아이디가 저장됨
+
+- N:M 에서는 데이터를 조회할 때 여러 단계를 거쳐야 함.
+- 노드 해시태그를 사용한 게시물을 조회하는 경우, 먼저 노드 해시태그를 Hashtag 모델에서 조회하고 가져온 태그의 아이디(1)를 바탕으로 PostHashtag 모델에서
+hashtagId가 1인 postId들을 찾아 Post모델에서 정보를 가져와야 함.
+=> 시퀄라이즈는 이 과정을 편하게 할 수 있도록 몇가지 메서드를 지원함
+
+``` JS
+// async / await
+async (req, res, next) => {
+    const tag = await Hashtag.findOne({ where: { title: '노드' } });
+    const posts = await tag.getPosts();
+}
+```
+- 해시태그를 찾으면 그 해시태그에서 바로 getPosts 메서드를 사용할 수 있음 (get + 모델이름의 복수형)
+
+``` JS
+// Promise
+Hashtag.findOne({ where: { title: '노드' } })
+    .then(tag => tag.getPosts())
+    .then(posts => console.log(posts));
+```
+
+
+- (get + 모델이름 복수형)과 비슷한 것으로 add + 모델이름 복수형이 있음
+- 두 테이블 간 N:M 관계를 추가해줌
+
+``` JS
+async (req, res, next) => {
+    const tag = await Hashtag.findOne({ where: { title: '노드' } });
+    await tag.addPosts(3)
+}
+```
+- PostHashtag 모델에 postId가 3이고 hashtagId가 1인 Raw가 생성됨
+
+
+### 시퀄라이즈 CRUD 쿼리
+``` SQL
+-- SQL 쿼리 --
+INSERT INTO users (name, age, married, comment) VALUES ('zero', 24, 0, '자기소개1');
+```
+``` JS
+// JavaScript Sequelize 쿼리
+const { User } = require('../models')
+User.create({
+    name: 'zero',
+    age: 24,
+    married: false,
+    comment: '자기소개1',
+});
+```
+- models 모듈의 User 모델을 불러와서 create 메서드를 사용
+- MySQL의 자료형이 아닌 시퀄라이즈 모델에 정의한 자료형대로 넣어줘야 함. (married가 0이 아닌 false)
+
+
+* 유저의 모든 데이터 조회
+``` SQL
+-- SQL 쿼리 --
+SELECT * FROM users;
+```
+``` JS
+User.findAll({});
+```
+
+* 원하는 컬럼만 조회
+``` SQL
+-- SQL 쿼리 --
+SELECT name, married FROM users;
+```
+``` JS
+User.findAll({
+    attributes: ['name', 'married'],
+});
+```
+
+* where 옵션 추가
+``` SQL
+-- SQL 쿼리 --
+SELECT name, age FROM users WHERE married = 1 AND age > 30;
+```
+``` JS
+const { User, Sequelize: { Op } } = require('../models');
+User.findAll({
+    attributes : ['name', 'age'],
+    where : {
+        married: 1,
+        age: { [Op.gt]: 30 },
+    }
+});
+```
+- 시퀄라이즈는 자바스크립트 객체를 사용해서 쿼리를 생성해야 하므로 Op.gt같은 특수한 연산자들이 사용됨. Sequelize 객체 내부의 Op 객체를 불러와서 사용.
+- (Op.gt, Op.gte, Op.lt, Op.lte, Op.ne, Op.or, Op.in, Op.notIn)
+
+* Op.or 예제
+``` JS
+const { User, Sequelize: { Op } } = require('../models');
+User.findAll({
+    attributes : ['name', 'age'],
+    where : {
+        [Op.or]: [ { married: 0 }, { age: { [Op.gt]: 30 } } ]
+    }
+});
+```
+- OR 연산에 적용할 쿼리를 배열로 나열
+
+
+* 시퀄라이즈 정렬
+``` SQL
+-- SQL 쿼리 --
+SELECT id, name FROM users ORDER BY age DESC;
+```
+``` JS
+User.findAll({
+    attributes : ['name', 'age'],
+    order: [['age', 'DESC']],
+});
+```
+- order 옵션을 통해 사용가능 (배열안에 배열 -> 정렬은 기준 컬럼 2개 이상으로 할수도 있기 때문)
+
+
+* 시퀄라이즈 Limit
+``` SQL
+-- SQL 쿼리 --
+SELECT id, name FROM users ORDER BY age DESC LIMIT 1;
+```
+``` JS
+User.findAll({
+    attributes : ['name', 'age'],
+    order: [['age', 'DESC']],
+    limit: 1,
+});
+```
+
+* 시퀄라이즈 offset
+``` SQL
+-- SQL 쿼리 --
+SELECT id, name FROM users ORDER BY age DESC LIMIT 1 OFFSET 1;
+```
+``` JS
+User.findAll({
+    attributes : ['name', 'age'],
+    order: [['age', 'DESC']],
+    limit: 1,
+    offset: 1,
+});
+```
+
+* 시퀄라이즈 update
+``` SQL
+-- SQL 쿼리 --
+UPDATE users SET comment = '바꿀 내용' WHERE id=2;
+```
+``` JS
+User.update({
+    comment: '바꿀 내용',
+}, {
+    where: { id: 2 },
+});
+```
+- 첫 번째 인자는 수정할 내용, 두 번째 인자는 수정 대상 로우를 찾는 조건
+
+* 시퀄라이즈 update
+``` SQL
+-- SQL 쿼리 --
+DELETE FROM users WHERE id=2;
+```
+``` JS
+User.destroy({
+    where: { id: 2 },
+});
+```
+- destroy 메서드로 삭제.
+- where 옵션에 조건들을 작성
