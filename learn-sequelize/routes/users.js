@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async(req, res, next) => {
   try {
-    const result = User.create({
+    const result = await User.create({
       name : req.body.name,
       age: req.body.age,
       married: req.body.married

@@ -1,7 +1,5 @@
-const { Server } = require('http');
 const path = require('path');
 const Sequelize = require('sequelize');
-const { serialize } = require('v8');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
