@@ -12,10 +12,14 @@
 - npm i -D nodemon 
 
 
-## 비밀키 관리
+### 비밀키 관리
 - 키를 하드코딩하면 소스 코드가 유출되었을 때 키도 같이 유출되므로 별도로 관리해야 함
 - npm i dotenv
 - 비밀키는 .env에 모아두고 dotenv가 .env파일을 읽어 process.env객체에 넣음
 
 - .env 파일 생성 후 키=값 형태로 비밀키 추가
 
+===============================================================
+
+- user, post, hashtag 모델 생성 후 /config/config.json에서 development mysql 데이터 변경
+- 콘솔에 "sequelize db:create" 하면 데이터베이스 생성
