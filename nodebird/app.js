@@ -3,15 +3,19 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const path = require('path');
 const session = require('express-session');
+const flash = require('connect-flash')
+const passport = require('passport');
 const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 
 dotenv.config();
 const pageRouter = require('./routes/page');
 const { sequelize } = require('./models');
+const passportConfig = require('./passport');
 
 const app = express();
 sequelize.sync();
+passportConfig(passport);
 
 var engines = require('consolidate')
 
@@ -40,6 +44,9 @@ app.use(session({
     secure: false,
   },
 }));
+app.use(flash());
+app.use(passport.initialize());  // req 요청 객체에 passport 설정 담음
+app.use(passport.session());    // req.session 객체에 passport 정보 저장
 
 app.use('/', pageRouter);
 

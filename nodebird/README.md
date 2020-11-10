@@ -23,3 +23,9 @@
 
 - user, post, hashtag 모델 생성 후 /config/config.json에서 development mysql 데이터 변경
 - 콘솔에 "sequelize db:create" 하면 데이터베이스 생성
+
+- app.js에서 시퀄라이즈 동기화
+``` js
+const { sequelize } = require('./models')
+sequelize.sync()
+```
