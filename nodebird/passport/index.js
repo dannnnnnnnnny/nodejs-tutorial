@@ -1,3 +1,5 @@
+// * passport는 로그인시의 동작을 전략(strategy)라고 함
+
 // **## 전체 과정 ##**
 // 1) 로그인 요청
 // 2) passport.authenticate 메서드 호출
@@ -18,18 +20,12 @@ const kakao = require('./kakaoStrategy')
 const { User } = require('../models') 
 
 module.exports = (passport) => {
-    // req.session 객체에 어떤 데이터를 저장할지 선택함
-    // done 두 번째 인자로 user.id 보내 저장함
-    // (세션에 사용자 정보 객체를 아이디로 저장)
+
     passport.serializeUser((user, done) => {
         done(null, user.id)
     })
 
-    // 매 요청시 passport.session() 미들웨어가 이 메서드를 호출함
-    // serializeUser에서 세션에 저장했던 ID를 받아 DB에서 사용자 정보 조회
-    // 조회한 정보를 req.user에 저장하여 앞으로 
-    // req.user를 통해 로그인한 사용자의 정보 가져올 수 있음
-    // (세션에 저장한 아이디를 통해 사용자 정보 객체를 불러옴)
+    
     passport.deserializeUser((id, done) => {
         User.findOne({ where: { id } })
         .then(user => done(null, user))
@@ -39,3 +35,18 @@ module.exports = (passport) => {
     local(passport)
     kakao(passport)
 }
+
+
+
+// * seriailizeUser
+// req.session 객체에 어떤 데이터를 저장할지 선택함
+// done 두 번째 인자로 user.id 보내 저장함
+// (세션에 사용자 정보 객체를 아이디로 저장)
+
+
+// * deserializeUser
+// 매 요청시 passport.session() 미들웨어가 이 메서드를 호출함
+// serializeUser에서 세션에 저장했던 ID를 받아 DB에서 사용자 정보 조회
+// 조회한 정보를 req.user에 저장하여 앞으로 
+// req.user를 통해 로그인한 사용자의 정보 가져올 수 있음
+// (세션에 저장한 아이디를 통해 사용자 정보 객체를 불러옴)

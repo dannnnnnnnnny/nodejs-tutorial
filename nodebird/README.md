@@ -29,3 +29,12 @@
 const { sequelize } = require('./models')
 sequelize.sync()
 ```
+
+### Passport 모듈 설치
+- npm i passport passport-local passport-kakao bcrypt
+
+### Passport local 로그인 구현
+- SNS 서비스로 로그인하는 것이 아닌 아이디/비밀번호로 로그인하는 것
+- 회원가입 로그인 로그아웃 라우터를 만들어야하는데, 이미 로그인한 유저는 회원가입과 로그인 라우터에 접근하면 안되기 때문에 라우터에 접근 권한을 제어하는 미들웨어를 추가해줘야 함.
+- passport가 req 객체에 추가해주는 isAuthenticated 메서드 사용
+- /routes/middlewares.js
