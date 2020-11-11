@@ -38,3 +38,11 @@ sequelize.sync()
 - 회원가입 로그인 로그아웃 라우터를 만들어야하는데, 이미 로그인한 유저는 회원가입과 로그인 라우터에 접근하면 안되기 때문에 라우터에 접근 권한을 제어하는 미들웨어를 추가해줘야 함.
 - passport가 req 객체에 추가해주는 isAuthenticated 메서드 사용
 - /routes/middlewares.js
+
+
+## Multer 모듈로 이미지 업로드 구현
+- 이미지는 보통 input[type=file] 태그 또는 form 태그로 업로드함
+- form 인코딩 타입은 multipart/form-data 인 경우가 많은데 이런 형식으로 올라온 데이터는 직접 처리하기가 힘드므로 multipart 처리용 모듈을 사용하는 것이 좋음
+- npm i multer
+
+- (/routes/post.js)
