@@ -5,16 +5,16 @@ const users = {}; // 데이터 저장용
 
 http.createServer(async (req, res) => {
   try {
-    if (req.method === 'GET') {
-      if (req.url === '/') {
+    if (req.method === 'GET') {         // GET 방식
+      if (req.url === '/') {            // Root 경로
         const data = await fs.readFile('./restFront.html');
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         return res.end(data);
-      } else if (req.url === '/about') {
+      } else if (req.url === '/about') {        
         const data = await fs.readFile('./about.html');
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         return res.end(data);
-        
+
       } else if (req.url === '/users') {
         res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
         return res.end(JSON.stringify(users));
